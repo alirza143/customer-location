@@ -1,0 +1,26 @@
+{
+  "name": "magecrafts/customer-location",
+  "description": "Add customer location if allowed by the browser",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ali Raza",
+      "email": "ali.rza143@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "~7.4||~8.3",
+    "magento/framework": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Magecrafts\\CustomerLocation\\": ""
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_entity" resource="default" engine="innodb" comment="Customer Entity">
+        <column name="customer_location" xsi:type="text" nullable="true" comment="Customer Location Data (JSON)" />
+    </table>
+</schema>

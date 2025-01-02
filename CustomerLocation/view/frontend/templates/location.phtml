@@ -1,0 +1,49 @@
+<?php
+/**
+ * @var \Magecrafts\CustomerLocation\Block\Location $block
+ */
+?>
+<script>
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            if (!<?= json_encode($block->hasLocation()) ?>) {
+                console.log("Customer does not have a location, fetching...");
+                getLocationAndSave();
+            }
+        });
+
+        function getLocationAndSave() {
+            if (navigator.geolocation) {
+                console.log("Geolocation supported, attempting to fetch location...");
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const data = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        form_key: '<?= $block->getFormKey() ?>'
+                    };
+
+                    console.log("Location obtained: ", data);
+
+                    $.ajax({
+                        url: '<?= $block->getSaveLocationUrl() ?>',
+                        type: 'POST',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: data,
+                        success: function (response) {
+                            console.log('Location saved successfully:', response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error saving location:', status, error);
+                            console.log('Response:', xhr.responseText);
+                        }
+                    });
+                }, function (error) {
+                    console.error('Error obtaining location:', error.message);
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        }
+    });
+</script>
+
